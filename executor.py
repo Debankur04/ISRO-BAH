@@ -39,10 +39,10 @@ def execute_workflow(workflow):
 
 def resolve_machine(action):
     # You can extend this as more actions are defined
-    rasterio_actions = {"load_raster"}
-    numpy_actions = {"threshold"}
-    fiona_actions = {"load_vector"}
-    geopandas_actions = {"buffer", "intersect"}
+    rasterio_actions = {"read_satellite_bands"}
+    numpy_actions = {"classify_ndvi_raster"}
+    fiona_actions = {"read_vector_file_metadata"}
+    geopandas_actions = {"convert_crs_geodata"}
 
     if action in rasterio_actions:
         return "rasterio"
