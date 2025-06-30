@@ -280,9 +280,6 @@ def stream_large_vector_file(file_path, chunk_size=1000, processing_function=Non
         }
 
 # Template for all handler files
-def some_action(): return "something"
-def another_action(): return 42
-
 def run(action, step, env):
     func = globals().get(action)
     if callable(func):

@@ -594,9 +594,6 @@ def add_hover_info_to_points(points_data, hover_columns, marker_size=8, marker_c
     }
 
 
-# Template for all handler files
-def some_action(): return "something"
-def another_action(): return 42
 
 def run(action, step, env):
     func = globals().get(action)

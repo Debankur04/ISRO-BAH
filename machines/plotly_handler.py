@@ -7,12 +7,7 @@ import json
 from typing import Dict, List, Union, Optional
 
 
-def plot_interactive_choropleth(data: Union[Dict, pd.DataFrame, str],
-                                geojson_data: Union[Dict, str] = None,
-                                location_col: str = 'location',
-                                value_col: str = 'value',
-                                color_scale: str = 'Viridis',
-                                title: str = 'Interactive Choropleth Map') -> Dict:
+def plot_interactive_choropleth(data: Union[Dict, pd.DataFrame, str],geojson_data: Union[Dict, str] = None,location_col: str = 'location',value_col: str = 'value',color_scale: str = 'Viridis',title: str = 'Interactive Choropleth Map') -> Dict:
     """
     Create an interactive choropleth map with JSON-like response
 
@@ -95,10 +90,7 @@ def plot_interactive_choropleth(data: Union[Dict, pd.DataFrame, str],
         }
 
 
-def visualize_geojson_boundaries(geojson_data: Union[Dict, str],
-                                 properties_to_show: List[str] = None,
-                                 color_property: str = None,
-                                 title: str = 'GeoJSON Boundaries Visualization') -> Dict:
+def visualize_geojson_boundaries(geojson_data: Union[Dict, str],properties_to_show: List[str] = None,color_property: str = None,title: str = 'GeoJSON Boundaries Visualization') -> Dict:
     """
     Visualize GeoJSON boundaries with interactive features
 
@@ -186,14 +178,7 @@ def visualize_geojson_boundaries(geojson_data: Union[Dict, str],
         }
 
 
-def animate_time_series_map(data: Union[Dict, pd.DataFrame, str],
-                            lat_col: str = 'lat',
-                            lon_col: str = 'lon',
-                            time_col: str = 'time',
-                            value_col: str = 'value',
-                            size_col: str = None,
-                            animation_speed: int = 500,
-                            title: str = 'Animated Time Series Map') -> Dict:
+def animate_time_series_map(data: Union[Dict, pd.DataFrame, str],lat_col: str = 'lat',lon_col: str = 'lon',time_col: str = 'time',value_col: str = 'value',size_col: str = None,animation_speed: int = 500,title: str = 'Animated Time Series Map') -> Dict:
     """
     Create an animated time series map
 
@@ -281,12 +266,7 @@ def animate_time_series_map(data: Union[Dict, pd.DataFrame, str],
         }
 
 
-def create_3d_terrain_surface(elevation_data: Union[Dict, pd.DataFrame, str, np.ndarray],
-                              x_col: str = 'x',
-                              y_col: str = 'y',
-                              z_col: str = 'elevation',
-                              color_scale: str = 'terrain',
-                              title: str = '3D Terrain Surface') -> Dict:
+def create_3d_terrain_surface(elevation_data: Union[Dict, pd.DataFrame, str, np.ndarray],x_col: str = 'x',y_col: str = 'y',z_col: str = 'elevation',color_scale: str = 'terrain',title: str = '3D Terrain Surface') -> Dict:
     """
     Create a 3D terrain surface visualization
 
@@ -407,14 +387,7 @@ def create_3d_terrain_surface(elevation_data: Union[Dict, pd.DataFrame, str, np.
         }
 
 
-def add_hover_info_to_points(data: Union[Dict, pd.DataFrame, str],
-                             lat_col: str = 'lat',
-                             lon_col: str = 'lon',
-                             hover_cols: List[str] = None,
-                             color_col: str = None,
-                             size_col: str = None,
-                             custom_hover_template: str = None,
-                             title: str = 'Interactive Points with Hover Info') -> Dict:
+def add_hover_info_to_points(data: Union[Dict, pd.DataFrame, str],lat_col: str = 'lat',lon_col: str = 'lon',hover_cols: List[str] = None,color_col: str = None,size_col: str = None,custom_hover_template: str = None,title: str = 'Interactive Points with Hover Info') -> Dict:
     """
     Create an interactive map with detailed hover information for points
 
@@ -538,9 +511,7 @@ def add_hover_info_to_points(data: Union[Dict, pd.DataFrame, str],
 
 
 
-# Template for all handler files
-def some_action(): return "something"
-def another_action(): return 42
+
 
 def run(action, step, env):
     func = globals().get(action)

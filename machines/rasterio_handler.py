@@ -524,9 +524,7 @@ def reproject_resample_raster(raster_data, target_crs, target_resolution=None, r
     }
 
 
-# Template for all handler files
-def some_action(): return "something"
-def another_action(): return 42
+
 
 def run(action, step, env):
     func = globals().get(action)

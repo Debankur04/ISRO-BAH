@@ -352,8 +352,6 @@ def customize_map_projection(geodata, source_crs, target_crs, extent_bounds=None
 
 
 # Template for all handler files
-def some_action(): return "something"
-def another_action(): return 42
 
 def run(action, step, env):
     func = globals().get(action)

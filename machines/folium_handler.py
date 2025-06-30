@@ -445,9 +445,6 @@ def export_html_leaflet_map(folium_map, output_path, export_options=None):
 
     return export_metadata
 
-# Template for all handler files
-def some_action(): return "something"
-def another_action(): return 42
 
 def run(action, step, env):
     func = globals().get(action)

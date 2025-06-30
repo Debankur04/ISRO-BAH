@@ -611,10 +611,6 @@ def convert_crs_geodata(gdf, target_crs, preserve_original=True):
         }
 
 
-# Template for all handler files
-def some_action(): return "something"
-def another_action(): return 42
-
 def run(action, step, env):
     func = globals().get(action)
     if callable(func):

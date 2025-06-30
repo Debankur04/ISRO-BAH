@@ -53,7 +53,6 @@ def create_geometries(geometry_type: str, coordinates: List, properties: Dict = 
             "geometry": None
         }
 
-
 def check_geometry_intersections(geometry1: Dict, geometry2: Dict) -> Dict[str, Any]:
     """
     Check if two geometries intersect
@@ -117,7 +116,6 @@ def check_geometry_intersections(geometry1: Dict, geometry2: Dict) -> Dict[str, 
             "error": str(e)
         }
 
-
 def calculate_geometry_distance(geometry1: Dict, geometry2: Dict) -> Dict[str, Any]:
     """
     Calculate distance between two geometries
@@ -178,7 +176,6 @@ def calculate_geometry_distance(geometry1: Dict, geometry2: Dict) -> Dict[str, A
             "closest_points": [],
             "error": str(e)
         }
-
 
 def generate_convex_hull(points: List[List[float]]) -> Dict[str, Any]:
     """
@@ -263,7 +260,6 @@ def generate_convex_hull(points: List[List[float]]) -> Dict[str, Any]:
             "hull_geometry": None,
             "error": str(e)
         }
-
 
 def fix_invalid_geometries(geometry: Dict) -> Dict[str, Any]:
     """
@@ -374,8 +370,6 @@ def fix_invalid_geometries(geometry: Dict) -> Dict[str, Any]:
             "error": str(e)
         }
 
-
-# Helper functions
 def _calculate_bounds(coordinates: List, geometry_type: str) -> Dict[str, float]:
     """Calculate bounding box for coordinates"""
     flat_coords = _flatten_coordinates(coordinates)
@@ -392,7 +386,6 @@ def _calculate_bounds(coordinates: List, geometry_type: str) -> Dict[str, float]
         "maxy": max(y_coords)
     }
 
-
 def _flatten_coordinates(coordinates: List) -> List[float]:
     """Flatten nested coordinate arrays"""
     result = []
@@ -406,11 +399,9 @@ def _flatten_coordinates(coordinates: List) -> List[float]:
             result.append(item)
     return result
 
-
 def _euclidean_distance(p1: List[float], p2: List[float]) -> float:
     """Calculate Euclidean distance between two points"""
     return math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
-
 
 def _point_on_line(point: List[float], line: List[List[float]]) -> bool:
     """Check if point lies on line segment"""
@@ -418,7 +409,6 @@ def _point_on_line(point: List[float], line: List[List[float]]) -> bool:
         if _point_on_segment(point, line[i], line[i + 1]):
             return True
     return False
-
 
 def _point_on_segment(point: List[float], seg_start: List[float], seg_end: List[float]) -> bool:
     """Check if point lies on line segment"""
@@ -432,7 +422,6 @@ def _point_on_segment(point: List[float], seg_start: List[float], seg_end: List[
     return (min(seg_start[0], seg_end[0]) <= point[0] <= max(seg_start[0], seg_end[0]) and
             min(seg_start[1], seg_end[1]) <= point[1] <= max(seg_start[1], seg_end[1]))
 
-
 def _line_line_intersection(line1: List[List[float]], line2: List[List[float]]) -> Tuple[bool, List[List[float]]]:
     """Find intersection points between two lines"""
     intersections = []
@@ -443,7 +432,6 @@ def _line_line_intersection(line1: List[List[float]], line2: List[List[float]]) 
                 intersections.append(intersection)
 
     return len(intersections) > 0, intersections
-
 
 def _segment_intersection(p1: List[float], p2: List[float], p3: List[float], p4: List[float]) -> List[float]:
     """Find intersection point between two line segments"""
@@ -459,12 +447,10 @@ def _segment_intersection(p1: List[float], p2: List[float], p3: List[float], p4:
 
     return None
 
-
 def _bounds_intersect(bounds1: Dict, bounds2: Dict) -> bool:
     """Check if two bounding boxes intersect"""
     return not (bounds1["maxx"] < bounds2["minx"] or bounds2["maxx"] < bounds1["minx"] or
                 bounds1["maxy"] < bounds2["miny"] or bounds2["maxy"] < bounds1["miny"])
-
 
 def _point_to_line_distance(point: List[float], line: List[List[float]]) -> Tuple[float, List[float]]:
     """Calculate minimum distance from point to line"""
@@ -479,9 +465,7 @@ def _point_to_line_distance(point: List[float], line: List[List[float]]) -> Tupl
 
     return min_dist, closest_point
 
-
-def _point_to_segment_distance(point: List[float], seg_start: List[float], seg_end: List[float]) -> Tuple[
-    float, List[float]]:
+def _point_to_segment_distance(point: List[float], seg_start: List[float], seg_end: List[float]) -> Tuple[float, List[float]]:
     """Calculate distance from point to line segment"""
     # Vector from seg_start to seg_end
     seg_vec = [seg_end[0] - seg_start[0], seg_end[1] - seg_start[1]]
@@ -497,7 +481,6 @@ def _point_to_segment_distance(point: List[float], seg_start: List[float], seg_e
     projection = [seg_start[0] + t * seg_vec[0], seg_start[1] + t * seg_vec[1]]
 
     return _euclidean_distance(point, projection), projection
-
 
 def _line_to_line_distance(line1: List[List[float]], line2: List[List[float]]) -> Tuple[float, List[List[float]]]:
     """Calculate minimum distance between two lines"""
@@ -518,7 +501,6 @@ def _line_to_line_distance(line1: List[List[float]], line2: List[List[float]]) -
 
     return min_dist, closest_points
 
-
 def _calculate_centroid(coordinates: List, geometry_type: str) -> List[float]:
     """Calculate centroid of geometry"""
     flat_coords = _flatten_coordinates(coordinates)
@@ -529,7 +511,6 @@ def _calculate_centroid(coordinates: List, geometry_type: str) -> List[float]:
     y_coords = [coord for i, coord in enumerate(flat_coords) if i % 2 == 1]
 
     return [sum(x_coords) / len(x_coords), sum(y_coords) / len(y_coords)]
-
 
 def _polygon_area(points: List[List[float]]) -> float:
     """Calculate polygon area using shoelace formula"""
@@ -544,7 +525,6 @@ def _polygon_area(points: List[List[float]]) -> float:
 
     return abs(area) / 2
 
-
 def _polygon_perimeter(points: List[List[float]]) -> float:
     """Calculate polygon perimeter"""
     if len(points) < 2:
@@ -557,10 +537,6 @@ def _polygon_perimeter(points: List[List[float]]) -> float:
 
     return perimeter
 
-
-# Template for all handler files
-def some_action(): return "something"
-def another_action(): return 42
 
 def run(action, step, env):
     func = globals().get(action)

@@ -530,10 +530,6 @@ def align_rasters_with_warp(input_files, output_dir, reference_raster=None, targ
             "output_dir": output_dir
         }
 
-# Template for all handler files
-def some_action(): return "something"
-def another_action(): return 42
-
 def run(action, step, env):
     func = globals().get(action)
     if callable(func):

@@ -686,9 +686,6 @@ def annotate_map_plot(fig, ax, annotations, annotation_type='text', fontsize=10,
         }
 
 
-# Template for all handler files
-def some_action(): return "something"
-def another_action(): return 42
 
 def run(action, step, env):
     func = globals().get(action)
