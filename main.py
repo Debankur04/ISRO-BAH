@@ -2,10 +2,12 @@ from enum import Enum
 from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel, Field
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any, Optional, Dict
 from db import db
 
+
 app = FastAPI()
+
 
 # Enum for task status
 class Status(str, Enum):
@@ -53,15 +55,17 @@ async def api(request: Request):
         if check:
             raise HTTPException(status_code=409, detail="duplicate task id")
 
-
         await db["tasks"].insert_one(data.dict())
         return {
             "message": "Data Stored",
             "task_id": data.task_id,
             "session_token": session_token
         }
+
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error storing data: {e}")
+
+
 
 
 @app.get("/api/{task_id}")

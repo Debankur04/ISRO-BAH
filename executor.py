@@ -61,3 +61,50 @@ def resolve_machine(action):
     if action in geopandas_actions:
         return "geopandas"
     return None
+
+import asyncio
+from datetime import datetime
+from db import db
+
+collection = db["tasks"]
+
+async def process_task(task):
+    print("Processing:", task["task_id"])
+    await asyncio.sleep(1)  # Simulate delay
+    await collection.update_one(
+        {"task_id": task["task_id"]},
+        {
+            "$set": {
+                "status": "completed",
+                "completed_at": datetime.now(),
+                "result": task["workflow"]
+            }
+        }
+    )
+    print(f"✅ Task {task['task_id']} completed.\n")
+
+async def worker_loop():
+    print("🔁 Worker started. Press Ctrl+C to stop.")
+    try:
+        while True:
+            task_found = False
+            while True:
+                task = await collection.find_one_and_update(
+                    {"status": "pending"},
+                    {"$set": {"status": "processing"}},
+                    sort=[("created_at", 1)]
+                )
+                if task:
+                    task_found = True
+                    await process_task(task)
+                else:
+                    break  # No more pending tasks for now
+
+            if not task_found:
+                print("⏳ No pending tasks. Waiting 2 seconds...")
+            await asyncio.sleep(2)
+    except KeyboardInterrupt:
+        print("\n🛑 Worker stopped by user. Goodbye!")
+
+if __name__ == "__main__":
+    asyncio.run(worker_loop())
