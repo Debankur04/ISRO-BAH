@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Any, Optional, Dict
 from db import db
+from executor import execute_workflow
 
 
 app = FastAPI()
@@ -55,7 +56,20 @@ async def api(request: Request):
         if check:
             raise HTTPException(status_code=409, detail="duplicate task id")
 
+        env, results, success, completed_at  = await execute_workflow(data.workflow)
+
+        # ✅ Assign results back to the Pydantic model
+        data.result = {
+            "env": env,
+            "steps": results,
+            "success": success
+        }
+        data.status = Status.completed if success else Status.failed
+        data.completed_at = completed_at
+
+        # ✅ Now save the updated data
         await db["tasks"].insert_one(data.dict())
+
         return {
             "message": "Data Stored",
             "task_id": data.task_id,
